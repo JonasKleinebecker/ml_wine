@@ -1,0 +1,20 @@
+---
+title: "Fish Data Analysis"
+jupyter: python3
+---
+
+# imports
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from sklearn.svm import SVC
+from sklearn.linear_model import LinearRegression
+```
+
+```{python}
+wine_df = pd.read_csv("./wine.data", header=None)
+wine_df.columns = ["class", "alcohol", "malic_acid", "ash", "alcalinity", "magnesium", "phenols", "flavanoids", "nonflavanoids", "proanthocyanins", "color", "hue", "od280/od315", "proline"]
+wine_df.head()
+```
