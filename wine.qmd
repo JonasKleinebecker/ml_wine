@@ -11,10 +11,23 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from sklearn.svm import SVC
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 ```
 
 ```{python}
 wine_df = pd.read_csv("./wine.data", header=None)
 wine_df.columns = ["class", "alcohol", "malic_acid", "ash", "alcalinity", "magnesium", "phenols", "flavanoids", "nonflavanoids", "proanthocyanins", "color", "hue", "od280/od315", "proline"]
 wine_df.head()
+```
+```{python}
+wine_df.describe()
+```
+```{python}
+x,y = wine_df.iloc[:, 1:], wine_df.iloc[:, 0]
+x = (x - x.mean()) / x.std()
+# For Multinomial Logistic Regression (Softmax Regression)
+model_softmax = LogisticRegression(solver='lbfgs')
+model_softmax.fit(x, y)
+training_accuracy = model_softmax.score(x, y)
+print(training_accuracy)
 ```
