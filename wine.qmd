@@ -12,6 +12,7 @@ from matplotlib.figure import Figure
 from sklearn.svm import SVC
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
+from sklearn.decomposition import PCA
 ```
 
 ```{python}
@@ -30,4 +31,37 @@ model_softmax = LogisticRegression(solver='lbfgs')
 model_softmax.fit(x, y)
 training_accuracy = model_softmax.score(x, y)
 print(training_accuracy)
+```
+
+## Scatter Plots
+```{python}
+fig = plt.figure()
+ax = fig.add_axes([0, 0, 1, 1])
+ax.scatter(x.iloc[:, 0], x.iloc[:, 1], c=y)
+ax.set_xlabel("Alcohol")
+ax.set_ylabel("Malic Acid")
+ax.set_title("Alcohol vs Malic Acid")
+fig.show()
+```
+
+## Principal Component Analysis
+```{python}
+pca = PCA(n_components=2)
+pca.fit(x)
+x_pca = pca.transform(x)
+
+explained_variance = pca.explained_variance_ratio_ * 100  # Convert to percentage
+
+fig = plt.figure()
+ax = fig.add_axes([0, 0, 1, 1])
+scatter = ax.scatter(x_pca[:, 0], x_pca[:, 1], c=y)
+ax.set_xlabel(f"Principal Component 1 ({explained_variance[0]:.2f}%)")
+ax.set_ylabel(f"Principal Component 2 ({explained_variance[1]:.2f}%)")
+ax.set_title("Principal Component Analysis")
+
+if isinstance(y[0], (int, float)):  
+    cbar = fig.colorbar(scatter, ax=ax)
+    cbar.set_label("Class Labels")
+
+fig.show()
 ```
