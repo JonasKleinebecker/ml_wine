@@ -101,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="imports" class="level2">
 <h2 class="anchored" data-anchor-id="imports">Imports</h2>
-<div id="6c42dbc1" class="cell" data-execution_count="1">
+<div id="63e1568d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -111,16 +111,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="load-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-dataset">Load Dataset</h2>
-<div id="7ee52b88" class="cell" data-execution_count="2">
+<div id="ff5c8441" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>wine_df <span class="op">=</span> pd.read_csv(<span class="st">"./wine.data"</span>, header<span class="op">=</span><span class="va">None</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>wine_df.columns <span class="op">=</span> [<span class="st">"class"</span>, <span class="st">"alcohol"</span>, <span class="st">"malic_acid"</span>, <span class="st">"ash"</span>, <span class="st">"alcalinity"</span>, <span class="st">"magnesium"</span>, <span class="st">"phenols"</span>, <span class="st">"flavanoids"</span>, <span class="st">"nonflavanoids"</span>, <span class="st">"proanthocyanins"</span>, <span class="st">"color"</span>, <span class="st">"hue"</span>, <span class="st">"od280/od315"</span>, <span class="st">"proline"</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>wine_df.sample(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="86">
+<div class="cell-output cell-output-display" data-execution_count="151">
 <div>
 
 
@@ -146,57 +147,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">120</td>
+<td data-quarto-table-cell-role="th">77</td>
 <td>2</td>
-<td>11.45</td>
-<td>2.40</td>
-<td>2.42</td>
-<td>20.0</td>
-<td>96</td>
-<td>2.90</td>
-<td>2.79</td>
-<td>0.32</td>
-<td>1.83</td>
-<td>3.25</td>
-<td>0.80</td>
-<td>3.39</td>
-<td>625</td>
+<td>11.84</td>
+<td>2.89</td>
+<td>2.23</td>
+<td>18.0</td>
+<td>112</td>
+<td>1.72</td>
+<td>1.32</td>
+<td>0.43</td>
+<td>0.95</td>
+<td>2.65</td>
+<td>0.96</td>
+<td>2.52</td>
+<td>500</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">123</td>
-<td>2</td>
+<td data-quarto-table-cell-role="th">37</td>
+<td>1</td>
 <td>13.05</td>
-<td>5.80</td>
-<td>2.13</td>
-<td>21.5</td>
-<td>86</td>
-<td>2.62</td>
-<td>2.65</td>
-<td>0.30</td>
-<td>2.01</td>
-<td>2.60</td>
-<td>0.73</td>
-<td>3.10</td>
-<td>380</td>
+<td>1.65</td>
+<td>2.55</td>
+<td>18.0</td>
+<td>98</td>
+<td>2.45</td>
+<td>2.43</td>
+<td>0.29</td>
+<td>1.44</td>
+<td>4.25</td>
+<td>1.12</td>
+<td>2.51</td>
+<td>1105</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">38</td>
-<td>1</td>
-<td>13.07</td>
-<td>1.50</td>
-<td>2.10</td>
-<td>15.5</td>
-<td>98</td>
-<td>2.40</td>
-<td>2.64</td>
-<td>0.28</td>
-<td>1.37</td>
-<td>3.70</td>
-<td>1.18</td>
-<td>2.69</td>
-<td>1020</td>
+<td data-quarto-table-cell-role="th">110</td>
+<td>2</td>
+<td>11.46</td>
+<td>3.74</td>
+<td>1.82</td>
+<td>19.5</td>
+<td>107</td>
+<td>3.18</td>
+<td>2.58</td>
+<td>0.24</td>
+<td>3.58</td>
+<td>2.90</td>
+<td>0.75</td>
+<td>2.81</td>
+<td>562</td>
 </tr>
 <tr class="even">
+<td data-quarto-table-cell-role="th">133</td>
+<td>3</td>
+<td>12.70</td>
+<td>3.55</td>
+<td>2.36</td>
+<td>21.5</td>
+<td>106</td>
+<td>1.70</td>
+<td>1.20</td>
+<td>0.17</td>
+<td>0.84</td>
+<td>5.00</td>
+<td>0.78</td>
+<td>1.29</td>
+<td>600</td>
+</tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">104</td>
 <td>2</td>
 <td>12.51</td>
@@ -213,23 +231,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>3.57</td>
 <td>672</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">68</td>
-<td>2</td>
-<td>13.34</td>
-<td>0.94</td>
-<td>2.36</td>
-<td>17.0</td>
-<td>110</td>
-<td>2.53</td>
-<td>1.30</td>
-<td>0.55</td>
-<td>0.42</td>
-<td>3.17</td>
-<td>1.02</td>
-<td>1.93</td>
-<td>750</td>
-</tr>
 </tbody>
 </table>
 
@@ -239,9 +240,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
-<div id="925598e3" class="cell" data-execution_count="3">
+<div id="06b6c299" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wine_df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="87">
+<div class="cell-output cell-output-display" data-execution_count="152">
 <div>
 
 
@@ -411,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="scatter-plots" class="level2">
 <h2 class="anchored" data-anchor-id="scatter-plots">Scatter Plots</h2>
-<div id="aca78581" class="cell" data-execution_count="4">
+<div id="389080e9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>class_dfs <span class="op">=</span> []</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> wine_df[<span class="st">"class"</span>].unique():</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  class_dfs.append(wine_df[wine_df[<span class="st">"class"</span>] <span class="op">==</span> c])</span>
@@ -420,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> class_df <span class="kw">in</span> class_dfs:</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ax.hist(class_df[col], bins<span class="op">=</span><span class="dv">10</span>, alpha<span class="op">=</span><span class="fl">0.75</span>, label<span class="op">=</span>class_df[<span class="st">"class"</span>].unique()[<span class="dv">0</span>])</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  plt.legend()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  plt.legend(title<span class="op">=</span><span class="st">"Class"</span>)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  plt.title(<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> Histogram"</span>)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -516,27 +517,173 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="box-plots" class="level2">
+<h2 class="anchored" data-anchor-id="box-plots">Box Plots</h2>
+<div id="7a469626" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> wine_df.drop(<span class="st">"class"</span>, axis<span class="op">=</span><span class="dv">1</span>).columns:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  fig <span class="op">=</span> plt.figure()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> class_df <span class="kw">in</span> class_dfs:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    ax.boxplot(class_df[col], positions<span class="op">=</span>[class_df[<span class="st">"class"</span>].unique()[<span class="dv">0</span>]])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  plt.title(<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> Boxplot"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-1.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-2.png" width="558" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-3.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-4.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-5.png" width="575" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-6.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-7.png" width="558" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-8.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-9.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-10.png" width="566" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-11.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-12.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wine_files/figure-html/cell-6-output-13.png" width="583" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="parrallel-coordinates-plot" class="level2">
+<h2 class="anchored" data-anchor-id="parrallel-coordinates-plot">Parrallel Coordinates Plot</h2>
+<div id="fbe806a4" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.parallel_coordinates(wine_df, color<span class="op">=</span><span class="st">"class"</span>, dimensions<span class="op">=</span>wine_df.drop(<span class="st">"class"</span>, axis<span class="op">=</span><span class="dv">1</span>).columns)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+        <script type="text/javascript">
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        </script>
+        <script type="module">import "https://cdn.plot.ly/plotly-3.0.0.min"</script>
+        
+</div>
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>                <div id="8bd2c84c-7e5d-4b3d-9c95-ef6b702d477f" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("8bd2c84c-7e5d-4b3d-9c95-ef6b702d477f")) {                    Plotly.newPlot(                        "8bd2c84c-7e5d-4b3d-9c95-ef6b702d477f",                        [{"dimensions":[{"label":"alcohol","values":{"dtype":"f8","bdata":"9ihcj8J1LEBmZmZmZmYqQFK4HoXrUSpAPQrXo3C9LEB7FK5H4XoqQGZmZmZmZixASOF6FK7HLEAfhetRuB4sQClcj8L1qC1AuB6F61G4K0AzMzMzMzMsQD0K16NwPSxAAAAAAACAK0AAAAAAAIAtQMP1KFyPwixAw\u002fUoXI9CK0CamZmZmZksQClcj8L1qCtA4XoUrkdhLEBI4XoUrkcrQB+F61G4HixAXI\u002fC9SjcKUDsUbgehWsrQDMzMzMzsylAAAAAAAAAK0CamZmZmRkqQEjhehSuxypAmpmZmZmZKkA9CtejcL0rQArXo3A9CixA9ihcj8J1K0ApXI\u002fC9SgrQFyPwvUoXCtAhetRuB6FK0CF61G4HgUrQPYoXI\u002fC9SpAj8L1KFyPKkCamZmZmRkqQKRwPQrXIypAcT0K16NwLEAfhetRuB4rQFK4HoXr0SpAw\u002fUoXI\u002fCK0B7FK5H4XoqQJqZmZmZGSpA7FG4HoVrLEDD9Shcj8IsQM3MzMzMzCtAMzMzMzMzLEDhehSuR+ErQJqZmZmZGSpAKVyPwvWoK0CkcD0K16MrQArXo3A9iitAexSuR+F6K0AfhetRuB4rQHE9CtejcCxAFK5H4XqUKkBxPQrXo3ArQD0K16NwvShAKVyPwvWoKEBI4XoUrkcpQNejcD0KVytAPQrXo3C9KEDXo3A9ClcoQD0K16NwvShAuB6F61E4KkA9CtejcL0oQK5H4XoUripA7FG4HoVrKEAUrkfhepQoQLgehetRuCtAexSuR+H6KkB7FK5H4fopQOxRuB6F6ydAUrgehetRJ0CPwvUoXA8qQK5H4XoUridAKVyPwvWoKEBmZmZmZmYpQAAAAAAAAChAcT0K16NwKUApXI\u002fC9SgoQJqZmZmZGSpArkfhehSuJ0DXo3A9ClcpQFK4HoXrUShAzczMzMxMJ0BI4XoUrkcnQClcj8L1KChAKVyPwvUoKEAAAAAAAAAoQOF6FK5HYSlAFK5H4XqUKEA9CtejcD0nQHE9Ctej8ChAH4XrUbieJ0AUrkfhepQoQD0K16NwvShAFK5H4XqUKEApXI\u002fC9SgoQDMzMzMzMylArkfhehSuKECkcD0K16MnQIXrUbgeBSlA16NwPQrXKEAAAAAAAIAoQHE9CtejcClAcT0K16NwKEC4HoXrUTgnQOxRuB6F6yZACtejcD0KKUCF61G4HoUnQFK4HoXr0SZAKVyPwvUoKECPwvUoXA8mQKRwPQrXoydA16NwPQrXKEAK16NwPYopQAAAAAAAAChAZmZmZmbmJkAfhetRuB4nQNejcD0K1yhAmpmZmZkZKkA9CtejcL0nQKRwPQrXIyhAXI\u002fC9SjcKEAUrkfhepQnQD0K16NwvShAFK5H4XoUKEC4HoXrUbgpQMP1KFyPwilAH4XrUbieKUBmZmZmZmYpQIXrUbgeBSlAMzMzMzMzKUAAAAAAAIAoQI\u002fC9ShcDylAexSuR+H6KkCuR+F6FK4pQFyPwvUo3ClAuB6F61G4KkAK16NwPQorQD0K16NwPStAAAAAAACAKEBSuB6F61EqQMP1KFyPwitAPQrXo3C9KUCkcD0K16MqQClcj8L1KCpAAAAAAAAAK0AUrkfhepQpQLgehetROCpA9ihcj8J1KkApXI\u002fC9SgpQNejcD0KVypArkfhehSuK0BmZmZmZuYoQK5H4XoUrixA9ihcj8L1KkC4HoXrUbgoQOF6FK5HYStAMzMzMzOzKUDsUbgehespQI\u002fC9ShcjytA9ihcj8J1K0BmZmZmZuYqQKRwPQrXoylAKVyPwvUoK0DNzMzMzMwqQGZmZmZmZihACtejcD2KKUBSuB6F61EsQOxRuB6FaytAzczMzMzMKkAK16NwPYoqQNejcD0KVypAw\u002fUoXI9CLEA="}},{"label":"malic_acid","values":{"dtype":"f8","bdata":"XI\u002fC9Shc+z97FK5H4Xr8P+F6FK5H4QJAMzMzMzMz\u002fz+4HoXrUbgEQClcj8L1KPw\u002f7FG4HoXr\u002fT8zMzMzMzMBQD0K16NwPfo\u002fmpmZmZmZ9T9I4XoUrkcBQK5H4XoUrvc\u002frkfhehSu+z+uR+F6FK77P+xRuB6F6\u002f0\u002f9ihcj8L1\u002fD+4HoXrUbj+Px+F61G4Hvk\u002fcT0K16Nw+T\u002fNzMzMzMwIQBSuR+F6FPo\u002fZmZmZmZmDkDD9Shcj8L9P5qZmZmZmfk\u002f9ihcj8L1\u002fD9mZmZmZmYAQFK4HoXrUfw\u002fhetRuB6F+z9mZmZmZmb+P+F6FK5H4fo\u002fAAAAAAAA+D+PwvUoXI\u002f6P0jhehSuR\u002f0\u002fexSuR+F6+D\u002fNzMzMzMz8P\u002fYoXI\u002fC9fw\u002fPQrXo3A9+j9mZmZmZmb6PwAAAAAAAPg\u002f7FG4HoXrD0Bcj8L1KFz7P7gehetRuA5APQrXo3A9\u002fj\u002fXo3A9CtcPQFK4HoXrUfw\u002fKVyPwvUoEEC4HoXrUbgMQOF6FK5H4fo\u002fKVyPwvUoAECuR+F6FK77P65H4XoUrvs\u002fZmZmZmZm+j8AAAAAAAD8P2ZmZmZmZv4\u002fuB6F61G4+j+uR+F6FK77PzMzMzMzM\u002fs\u002fhetRuB6F\u002fz\u002fhehSuR+H2PxSuR+F6FO4\u002fmpmZmZmZ8T\u002fD9Shcj8L1PwAAAAAAAPQ\u002fFK5H4XoU8j8zMzMzMzP3P1yPwvUoXPM\u002fKVyPwvUo8D+4HoXrUbjyPxSuR+F6FO4\u002fCtejcD0K8z\u002fD9Shcj8L5Pylcj8L1KPg\u002fj8L1KFyP+j+4HoXrUbj6P3E9CtejcPE\u002fFK5H4XoU\u002fj\u002fNzMzMzMzsPx+F61G4HgdArkfhehSu7z\u002f2KFyPwvUOQHE9CtejcO0\u002f9ihcj8L1\u002fD8UrkfhehTyP+F6FK5H4Q5AexSuR+F67D9cj8L1KFzvP8P1KFyPwvk\u002fuB6F61G4+j97FK5H4XoAQEjhehSuR\u002fU\u002fSOF6FK5H\u002fT8pXI\u002fC9Sj4P3sUrkfhevg\u002fpHA9CtejBkDXo3A9Ctf\u002fP1K4HoXrUfg\u002f9ihcj8L1AECPwvUoXI\u002f2Px+F61G4HvE\u002fXI\u002fC9ShcCUCkcD0K16MAQHE9CtejcPU\u002fmpmZmZmZA0CF61G4HoX7P65H4XoUrvs\u002fZmZmZmZmBECuR+F6FK77PwAAAAAAAPw\u002fpHA9Ctej9D+amZmZmZn1P+xRuB6F6w1AcT0K16NwA0BxPQrXo3AFQK5H4XoUruc\u002fPQrXo3A99j8pXI\u002fC9Sj4P4XrUbgehfc\u002fw\u002fUoXI\u002fC+T9xPQrXo3ALQHE9CtejcAtAMzMzMzMzA0BmZmZmZmYAQLgehetRuBFAMzMzMzMzF0A9CtejcD0RQEjhehSuRwFAexSuR+F6+D8K16NwPQoBQBSuR+F6FPo\u002fMzMzMzMzEUCamZmZmZn1P+xRuB6F6wdAexSuR+F6AkBmZmZmZmYMQNejcD0K1\u002fM\u002frkfhehSuA0DhehSuR+ESQArXo3A9ChZAuB6F61G4DECuR+F6FK4HQHsUrkfhegZAexSuR+F6BEBcj8L1KFwJQM3MzMzMzBNACtejcD0KD0CPwvUoXI8MQClcj8L1KBRAcT0K16NwEkDsUbgehesJQDMzMzMzMw9A9ihcj8L1CEBcj8L1KFwFQGZmZmZmZv4\u002fZmZmZmZmCkCkcD0K16P0P8P1KFyPwhRAexSuR+F6EEA9CtejcD0IQOF6FK5H4fo\u002fuB6F61G4+j+kcD0K16MOQBSuR+F6FApAKVyPwvUoCkCamZmZmZkLQBSuR+F6FAZAcT0K16NwEUCamZmZmZkNQPYoXI\u002fC9QpApHA9CtejBEBmZmZmZmYSQD0K16NwPQhAH4XrUbgeA0AUrkfhehQEQJqZmZmZmRZASOF6FK5HD0AfhetRuB4RQLgehetRuARAZmZmZmZmEEA="}},{"label":"ash","values":{"dtype":"f8","bdata":"cT0K16NwA0AfhetRuB4BQFyPwvUoXAVAAAAAAAAABED2KFyPwvUGQJqZmZmZmQNAmpmZmZmZA0DhehSuR+EEQFyPwvUoXAFAKVyPwvUoAkBmZmZmZmYCQI\u002fC9ShcjwJASOF6FK5HA0AfhetRuB4DQArXo3A9CgNAmpmZmZmZBUDD9Shcj8IFQPYoXI\u002fC9QRA16NwPQrXA0B7FK5H4XoEQD0K16NwPQJAMzMzMzMzBUDhehSuR+ECQClcj8L1KARA4XoUrkfhBEDD9Shcj8IJQPYoXI\u002fC9QRAH4XrUbgeAUBmZmZmZmYGQK5H4XoUrgFAmpmZmZmZBUDhehSuR+ECQOF6FK5H4QJAmpmZmZmZBUAzMzMzMzMFQEjhehSuRwNAuB6F61G4BkBmZmZmZmYEQM3MzMzMzABAFK5H4XoUBEB7FK5H4XoCQPYoXI\u002fC9QBAuB6F61G4BEBSuB6F61ECQM3MzMzMzABAhetRuB6FA0A9CtejcD0CQPYoXI\u002fC9QBAMzMzMzMzA0ApXI\u002fC9SgCQFK4HoXrUQBAzczMzMzMBEBcj8L1KFwDQHE9CtejcAVAAAAAAAAAAkCuR+F6FK4DQGZmZmZmZgJAcT0K16NwBUAAAAAAAAAEQMP1KFyPwvU\u002fPQrXo3A9AkApXI\u002fC9SgAQLgehetRuP4\u002fSOF6FK5HAUA9CtejcD0EQHsUrkfhegRAMzMzMzMz+z+4HoXrUbj+P+F6FK5H4QJAAAAAAAAA\u002fD+uR+F6FK4BQFyPwvUoXAVA7FG4HoXrAUDNzMzMzMwEQGZmZmZmZgJAuB6F61G4\u002fj9cj8L1KFz7P9ejcD0K1wFAMzMzMzMz\u002fz8zMzMzMzMDQAAAAAAAAABAmpmZmZmZAUAUrkfhehQEQI\u002fC9ShcjwJApHA9CtejBEDsUbgehesBQHsUrkfhegJA9ihcj8L1BECuR+F6FK4DQGZmZmZmZgJAj8L1KFyPAkBcj8L1KFwDQBSuR+F6FAJAw\u002fUoXI\u002fCAUA9CtejcD0CQJqZmZmZmQFA7FG4HoXrBUCuR+F6FK7\u002fP83MzMzMzABArkfhehSuAUAzMzMzMzP7P2ZmZmZmZv4\u002frkfhehSuA0AUrkfhehT+P65H4XoUrv8\u002fKVyPwvUoAkD2KFyPwvUAQD0K16NwPQJACtejcD0K\u002fz+amZmZmZkFQB+F61G4Hv0\u002fXI\u002fC9ShcAUBcj8L1KFwHQAAAAAAAAARAAAAAAAAABECamZmZmZkBQNejcD0K1\u002f8\u002fhetRuB6FAUCuR+F6FK7\u002fPwAAAAAAAABAXI\u002fC9ShcA0DXo3A9CtcJQNejcD0K1wVACtejcD0KAUAfhetRuB4DQFyPwvUoXAFAUrgehetRAkA9CtejcD0GQGZmZmZmZgJACtejcD0KA0CPwvUoXI8CQDMzMzMzMwNAMzMzMzMzA0DhehSuR+ECQAAAAAAAAAJAmpmZmZmZAUBSuB6F61EEQB+F61G4HgVAhetRuB6FAUDhehSuR+EEQJqZmZmZmQVAzczMzMzMAkDD9Shcj8IFQM3MzMzMzAJAmpmZmZmZAUAzMzMzMzMBQNejcD0K1wFA16NwPQrXA0AK16NwPQoDQOF6FK5H4QJA9ihcj8L1BEDXo3A9CtcDQAAAAAAAAAZAPQrXo3A9AkDNzMzMzMwAQI\u002fC9ShcjwJACtejcD0KA0AfhetRuB4FQJqZmZmZmQVAH4XrUbgeBUAK16NwPQoDQFK4HoXrUQRApHA9CtejBEDNzMzMzMwCQGZmZmZmZgJAFK5H4XoUAkDNzMzMzMwEQGZmZmZmZgJAhetRuB6FBUDhehSuR+EGQI\u002fC9ShcjwJAPQrXo3A9AkDXo3A9CtcDQJqZmZmZmQNA16NwPQrXA0AUrkfhehQCQPYoXI\u002fC9QJA7FG4HoXrBUA="}},{"label":"alcalinity","values":{"dtype":"f8","bdata":"MzMzMzMzL0BmZmZmZmYmQJqZmZmZmTJAzczMzMzMMEAAAAAAAAA1QGZmZmZmZi5AMzMzMzMzLUCamZmZmZkxQAAAAAAAACxAAAAAAAAAMEAAAAAAAAAyQM3MzMzMzDBAAAAAAAAAMEDNzMzMzMwmQAAAAAAAAChAMzMzMzMzMUAAAAAAAAA0QAAAAAAAADRAAAAAAACAMEBmZmZmZmYuQAAAAAAAADBAmpmZmZmZMkCamZmZmZkwQM3MzMzMzDFAAAAAAAAANEAAAAAAAAA5QJqZmZmZGTBAAAAAAAAAMUBmZmZmZmYzQAAAAAAAADBAAAAAAACANkCamZmZmRkzQDMzMzMzMzFAAAAAAACAM0AAAAAAAAAzQAAAAAAAgDRAAAAAAAAAL0AAAAAAAAAyQAAAAAAAAC9AZmZmZmZmKkAzMzMzMzMwQM3MzMzMzDJAAAAAAAAALkAAAAAAAIAxQAAAAAAAADFAZmZmZmbmMkAAAAAAAAAwQAAAAAAAADBAzczMzMzMMkBmZmZmZmYxQM3MzMzMzChAMzMzMzMzMUAAAAAAAAAsQJqZmZmZGTFAZmZmZmZmMEAAAAAAAIA0QM3MzMzMTDBAzczMzMzMMEAzMzMzM7MwQDMzMzMzMyVAAAAAAAAAMEDNzMzMzMwwQAAAAAAAADJAAAAAAAAAM0AAAAAAAAAzQJqZmZmZGTJAAAAAAAAALkCamZmZmZkzQAAAAAAAADFAzczMzMzMMEBmZmZmZmY0QAAAAAAAADlAAAAAAAAAOEAAAAAAAAA+QAAAAAAAADVAAAAAAAAAMEAAAAAAAAAwQAAAAAAAADJAmpmZmZmZLUAAAAAAAAA3QAAAAAAAADNAzczMzMzMMkAAAAAAAAA4QAAAAAAAgDZAAAAAAAAAMkAAAAAAAAAyQM3MzMzMzDZAAAAAAAAAOkCamZmZmZk1QJqZmZmZmTdAAAAAAACAMkAAAAAAAAA2QDMzMzMzszRAAAAAAAAAMkAAAAAAAAAyQAAAAAAAADNAAAAAAACANUAAAAAAAAAwQAAAAAAAgDJAAAAAAAAAMkAAAAAAAIAxQAAAAAAAgDJAAAAAAAAANUAAAAAAAIAzQAAAAAAAgDRAAAAAAAAANkAAAAAAAAAzQAAAAAAAgDZAAAAAAAAAM0AAAAAAAAA0QAAAAAAAgDNAAAAAAAAANUAAAAAAAAA0QAAAAAAAADVAAAAAAACANkAAAAAAAIA1QM3MzMzMzDRAAAAAAACANkAAAAAAAAAwQAAAAAAAADNAAAAAAAAANEAAAAAAAIA8QAAAAAAAgDpAAAAAAACANUAAAAAAAAA1QAAAAAAAADVAAAAAAACANUAAAAAAAIA8QAAAAAAAgDhAAAAAAAAANkAAAAAAAAAyQAAAAAAAADRAAAAAAAAAOEAAAAAAAIA1QAAAAAAAgDFAAAAAAACAMkAAAAAAAAA1QAAAAAAAADlAAAAAAACAM0AAAAAAAAA4QAAAAAAAADVAAAAAAAAANEAAAAAAAIA3QAAAAAAAADRAAAAAAACAMkAAAAAAAAA1QAAAAAAAADRAAAAAAACANUAAAAAAAIA1QAAAAAAAgDVAAAAAAAAAOEAAAAAAAAA2QAAAAAAAgDlAAAAAAACAMkAAAAAAAAA0QAAAAAAAADZAAAAAAACAM0AAAAAAAAA7QAAAAAAAADlAAAAAAACANkAAAAAAAAA1QAAAAAAAADRAAAAAAAAANkAAAAAAAIAyQAAAAAAAADZAAAAAAACANkAAAAAAAAA3QAAAAAAAgDNAAAAAAACAOEAAAAAAAAA5QAAAAAAAADNAAAAAAACAM0AAAAAAAAA0QAAAAAAAgDRAAAAAAAAAN0AAAAAAAAA0QAAAAAAAADRAAAAAAACAOEA="}},{"label":"magnesium","values":{"dtype":"i2","bdata":"fwBkAGUAcQB2AHAAYAB5AGEAYgBpAF8AWQBbAGYAcAB4AHMAbAB0AH4AZgBlAF8AYAB8AF0AXgBrAGAAZQBqAGgAhABuAGQAbgBiAGIAgAB1AFoAZQBnAGsAbwBmAGUAZwBsAFwAXgBvAHMAdgB0AHYAZgBsAFgAZQBkAF4AVwBoAGIATgBOAG4AlwBnAFYAVwCLAGUAYQBWAHAAiABlAFYAVgBOAFUAXgBjAFoAWABUAEYAUQBWAFAAWABiAKIAhgBVAFgAWABhAFgAYgBWAFUAWgBQAFQAXABeAGsAWABnAFgAVABVAFYAbABQAFcAYAB3AGYAVgBSAFUAVgBcAFgAUAB6AGgAYgBqAFUAXgBZAGAAWABlAGAAWQBhAFwAcABmAFAAVgBcAHEAewBwAHQAYgBnAF0AWQBhAGIAWQBYAGsAagBqAFoAWABvAFgAaQBwAGAAVgBbAF8AZgB4AHgAYAA="}},{"label":"phenols","values":{"dtype":"f8","bdata":"ZmZmZmZmBkAzMzMzMzMFQGZmZmZmZgZAzczMzMzMDkBmZmZmZmYGQClcj8L1KApAAAAAAAAABEDNzMzMzMwEQGZmZmZmZgZA16NwPQrXB0CamZmZmZkHQJqZmZmZmQFAzczMzMzMBEDNzMzMzMwIQGZmZmZmZgpAzczMzMzMBkBmZmZmZmYGQJqZmZmZmQdAZmZmZmZmCkCamZmZmZkFQAAAAAAAAAhASOF6FK5HA0DhehSuR+EEQNejcD0K1wNAPQrXo3A9BEAK16NwPQoFQM3MzMzMzAZAMzMzMzMzA0CamZmZmZkHQDMzMzMzMwVAAAAAAAAACEDhehSuR+EGQFyPwvUoXANAmpmZmZmZB0DNzMzMzMwCQJqZmZmZmQVAzczMzMzMBECamZmZmZkDQDMzMzMzMwNAAAAAAAAACEAzMzMzMzMJQJqZmZmZmQNAAAAAAAAACkAfhetRuB4FQAAAAAAAAAhAzczMzMzMBkAAAAAAAAAKQM3MzMzMzAhAAAAAAAAABkAK16NwPQoHQMP1KFyPwgVAmpmZmZmZA0AK16NwPQoPQAAAAAAAAAhAzczMzMzMBECuR+F6FK4HQJqZmZmZmQlAAAAAAAAACEAzMzMzMzMLQK5H4XoUrv8\u002fZmZmZmZmAEApXI\u002fC9SgAQM3MzMzMzABAAAAAAAAADEA9CtejcD3+P1yPwvUoXANA16NwPQrXB0DhehSuR+EAQD0K16NwPQRAmpmZmZmZ\u002fT+amZmZmZnxP5qZmZmZmQdAFK5H4XoU\u002fj9mZmZmZmYKQArXo3A9CgtAw\u002fUoXI\u002fC+T8zMzMzMzP\u002fP4XrUbgehfs\u002fZmZmZmZm\u002fj+kcD0K16MGQFyPwvUoXANAmpmZmZmZAUAAAAAAAAAAQGZmZmZmZvo\u002fmpmZmZmZAUCamZmZmZkBQHsUrkfhevw\u002fuB6F61G4\u002fj8zMzMzMzP\u002fP5qZmZmZmQFAmpmZmZmZ+T8zMzMzMzP3PxSuR+F6FPY\u002fmpmZmZmZA0ApXI\u002fC9SgIQAAAAAAAAARAmpmZmZmZ+T9mZmZmZmYEQClcj8L1KAxAzczMzMzMBkDXo3A9CtcBQDMzMzMzM\u002fc\u002fexSuR+F6BEAAAAAAAAAEQJqZmZmZmQFA4XoUrkfh+j9mZmZmZmb6PxSuR+F6FPY\u002f4XoUrkfhAkDsUbgehesFQHE9CtejcAlAZmZmZmZmBEAAAAAAAAD8P9ejcD0K1wNAexSuR+F6BECuR+F6FK4DQK5H4XoUrv8\u002fAAAAAAAAAEAUrkfhehT6PwAAAAAAAABAMzMzMzMzB0BxPQrXo3AJQJqZmZmZmQFA9ihcj8L1BEDhehSuR+EGQM3MzMzMzARA7FG4HoXrBUAK16NwPQoBQMP1KFyPwgFAzczMzMzMAEApXI\u002fC9Sj4P83MzMzMzPQ\u002fZmZmZmZm8j8zMzMzMzP7PwAAAAAAAABA7FG4HoXr+T8UrkfhehT2P6RwPQrXo\u002fw\u002f7FG4HoXr+T+PwvUoXI8CQKRwPQrXo\u002fg\u002fZmZmZmZm9j\u002fNzMzMzMz4PwAAAAAAAABAFK5H4XoU9j8AAAAAAAD4P1yPwvUoXO8\u002fMzMzMzMz+z\u002fhehSuR+H+P4\u002fC9Shcj\u002fY\u002fZmZmZmZm9j+uR+F6FK73P5qZmZmZmQFAzczMzMzM\u002fD+uR+F6FK73P9ejcD0K1\u002fs\u002fzczMzMzM\u002fD9mZmZmZmb+P2ZmZmZmZgZAzczMzMzMBEBmZmZmZmYCQEjhehSuR\u002f0\u002fZmZmZmZm+j89CtejcD32P5qZmZmZmfU\u002fexSuR+F69D8zMzMzMzP7P65H4XoUrvc\u002fzczMzMzM+D+uR+F6FK7\u002fPwAAAAAAAPQ\u002fPQrXo3A99j\u002fhehSuR+H6P+F6FK5H4fo\u002fzczMzMzM\u002fD9xPQrXo3D5P2ZmZmZmZvo\u002fZmZmZmZmAEA="}},{"label":"flavanoids","values":{"dtype":"f8","bdata":"exSuR+F6CEAUrkfhehQGQOxRuB6F6wlA7FG4HoXrC0CF61G4HoUFQB+F61G4HgtAKVyPwvUoBEAUrkfhehQEQNejcD0K1wdAMzMzMzMzCUCPwvUoXI8KQHE9CtejcANAFK5H4XoUBkCF61G4HoUNQB+F61G4Hg1ASOF6FK5HB0AfhetRuB4JQDMzMzMzMwtAcT0K16NwD0A9CtejcD0IQFyPwvUoXAlASOF6FK5HA0AK16NwPQoHQPYoXI\u002fC9QJA4XoUrkfhBEBxPQrXo3AFQIXrUbgehQdAhetRuB6FAUDD9Shcj8IHQKRwPQrXowJAAAAAAAAACkCF61G4HoUJQIXrUbgehQVA7FG4HoXrBUA9CtejcD0EQNejcD0K1wdAcT0K16NwBUBxPQrXo3ADQB+F61G4HgVAUrgehetRCEBSuB6F61EKQHE9CtejcAVAexSuR+F6DEAK16NwPQoFQAAAAAAAAAhAMzMzMzMzBUBcj8L1KFwJQB+F61G4HgtAXI\u002fC9ShcB0BSuB6F61EMQClcj8L1KApA7FG4HoXrB0DsUbgehesNQFK4HoXrUQZAMzMzMzMzB0A9CtejcD0GQAAAAAAAAAhA16NwPQrXCUBcj8L1KFwNQD0K16NwPeI\u002fcT0K16Nw8T+PwvUoXI\u002f2P6RwPQrXo\u002fw\u002fzczMzMzMCEAAAAAAAAD8PzMzMzMzMwVAcT0K16NwCUAAAAAAAAAAQM3MzMzMzPQ\u002fexSuR+F69D9SuB6F61HwP+F6FK5H4QZAcT0K16Nw\u002fT8fhetRuB4HQB+F61G4HgFAH4XrUbge+T89CtejcD0AQB+F61G4HvU\u002fmpmZmZmZ\u002fT9mZmZmZmYEQBSuR+F6FAJAPQrXo3A9BEBI4XoUrkf5P3E9CtejcPk\u002frkfhehSuAUAK16NwPQr\u002fPwrXo3A9Cvs\u002fw\u002fUoXI\u002fC+T8K16NwPQr7P3E9CtejcPk\u002fAAAAAAAA+D8AAAAAAAD0P1yPwvUoXPc\u002fAAAAAAAAAkAUrkfhehQCQClcj8L1KAJArkfhehSu7z8AAAAAAAAEQAAAAAAAAA5A7FG4HoXrB0Bcj8L1KFwBQMP1KFyPwvU\u002f4XoUrkfhAEA9CtejcD36P7gehetRuP4\u002fcT0K16Nw\u002fT89CtejcD0AQClcj8L1KPw\u002fUrgehetRAEBcj8L1KFwHQKRwPQrXowRAKVyPwvUoAkA9CtejcD0AQBSuR+F6FABAUrgehetRAkBcj8L1KFwBQJqZmZmZmfk\u002fuB6F61G4AEAAAAAAAAD0Pz0K16NwPfo\u002fUrgehetRBkBSuB6F61EUQArXo3A9CgFAMzMzMzMzBUA9CtejcD0IQDMzMzMzMwVAMzMzMzMzCUDsUbgehesBQJqZmZmZmQNAAAAAAAAA\u002fD8AAAAAAAD0P4XrUbgehfM\u002fcT0K16Nw8T8zMzMzMzPzP4\u002fC9Shcj+I\u002fH4XrUbge5T8UrkfhehTePzMzMzMzM+M\u002fuB6F61G43j8zMzMzMzPjPwAAAAAAAOA\u002fAAAAAAAA4D+kcD0K16PgP5qZmZmZmek\u002f9ihcj8L16D+amZmZmZnhP8P1KFyPwtU\u002fzczMzMzM5D9SuB6F61HoPz0K16NwPfY\u002fH4XrUbge+T\u002fD9Shcj8L1P3sUrkfhevQ\u002fj8L1KFyP6j+PwvUoXI\u002fiPylcj8L1KOQ\u002fj8L1KFyP6j+PwvUoXI\u002fiP\u002fYoXI\u002fC9fQ\u002fmpmZmZmZ8T9xPQrXo3DtP+xRuB6F6+E\u002fMzMzMzMz4z9mZmZmZmbmP8P1KFyPwuU\u002fFK5H4XoU3j9xPQrXo3DtPx+F61G4HuU\u002f4XoUrkfh6j+4HoXrUbjuP1yPwvUoXN8\u002fUrgehetR4D9mZmZmZmbmP4XrUbgeheM\u002fAAAAAAAA6D8UrkfhehTmP8P1KFyPwuU\u002fUrgehetR6D8="}},{"label":"nonflavanoids","values":{"dtype":"f8","bdata":"7FG4HoXr0T+kcD0K16PQPzMzMzMzM9M\u002fuB6F61G4zj\u002f2KFyPwvXYP8P1KFyPwtU\u002fMzMzMzMz0z\u002fXo3A9CtfTP4\u002fC9Shcj9I\u002fKVyPwvUozD8pXI\u002fC9SjMP6RwPQrXo9A\u002fj8L1KFyP0j+F61G4HoXbP4\u002fC9Shcj9I\u002fMzMzMzMz0z8fhetRuB7VP5qZmZmZmdk\u002fexSuR+F61D\u002fD9Shcj8LFP7gehetRuM4\u002fAAAAAAAA0D9I4XoUrkfRP6RwPQrXo9A\u002f7FG4HoXr0T8UrkfhehTeP8P1KFyPwtU\u002fSOF6FK5H0T+uR+F6FK7XP6RwPQrXo9A\u002fj8L1KFyP0j8pXI\u002fC9SjMP+F6FK5H4do\u002fAAAAAAAA4D+PwvUoXI\u002fSP6RwPQrXo9A\u002fw\u002fUoXI\u002fC1T+PwvUoXI\u002fSP+xRuB6F69E\u002fmpmZmZmZyT\u002fD9Shcj8LVP0jhehSuR9E\u002fw\u002fUoXI\u002fCxT97FK5H4XrUP+xRuB6F69E\u002fMzMzMzMz0z9I4XoUrkfRP+F6FK5H4co\u002fexSuR+F61D97FK5H4XrUP8P1KFyPwsU\u002fKVyPwvUozD97FK5H4XrUP\u002fYoXI\u002fC9dg\u002f4XoUrkfhyj+amZmZmZnJP6RwPQrXo9A\u002f16NwPQrX0z9SuB6F61HIP+xRuB6F69E\u002fKVyPwvUo5D\u002f2KFyPwvXgP3sUrkfhetQ\u002fUrgehetRyD\u002fNzMzMzMzcP65H4XoUrtc\u002fpHA9Ctej0D9I4XoUrkfRP5qZmZmZmeE\u002f7FG4HoXrwT+uR+F6FK7XP+F6FK5H4co\u002fSOF6FK5H0T\u002fhehSuR+HKP6RwPQrXo8A\u002fw\u002fUoXI\u002fC1T+4HoXrUbjOP4XrUbgehds\u002fZmZmZmZm1j+F61G4HoXbPzMzMzMzM9M\u002fpHA9Ctej0D+amZmZmZnZP4XrUbgeheM\u002fKVyPwvUozD8zMzMzMzPTP4XrUbgehds\u002fmpmZmZmZ2T+4HoXrUbjeP+F6FK5H4do\u002fpHA9Ctej4D8AAAAAAADgP4\u002fC9Shcj+I\u002fAAAAAAAA0D\u002fD9Shcj8LFP3sUrkfhetQ\u002f7FG4HoXrwT+PwvUoXI\u002fSP7gehetRuM4\u002fzczMzMzM3D+kcD0K16PQP4\u002fC9Shcj9I\u002fw\u002fUoXI\u002fC1T+uR+F6FK7XP3sUrkfhetQ\u002fH4XrUbge5T+uR+F6FK7XP7gehetRuN4\u002f9ihcj8L12D+PwvUoXI\u002fSP7gehetRuM4\u002fpHA9Ctej0D8zMzMzMzPjP+F6FK5H4do\u002fhetRuB6F2z+kcD0K16PgPzMzMzMzM9M\u002fw\u002fUoXI\u002fC1T+F61G4HoXbP65H4XoUrtc\u002fexSuR+F61D8UrkfhehTeP4XrUbgehds\u002fMzMzMzMz0z\u002fhehSuR+HKP65H4XoUrtc\u002f9ihcj8L12D+PwvUoXI\u002fiP5qZmZmZmdk\u002f4XoUrkfh2j\u002fhehSuR+HKP7gehetRuM4\u002fSOF6FK5H0T\u002fD9Shcj8LFPzMzMzMzM+M\u002fKVyPwvUo5D\u002f2KFyPwvXgPylcj8L1KOQ\u002fj8L1KFyP4j\u002f2KFyPwvXgP\u002fYoXI\u002fC9eA\u002frkfhehSu1z8AAAAAAADgPxSuR+F6FN4\u002fj8L1KFyP0j+F61G4HoXbP5qZmZmZmdk\u002fFK5H4XoU3j\u002fNzMzMzMzcP8P1KFyPwtU\u002fKVyPwvUozD+4HoXrUbjOP6RwPQrXo9A\u002fhetRuB6F4z\u002f2KFyPwvXgP4XrUbgeheM\u002fuB6F61G43j8pXI\u002fC9SjkP\u002fYoXI\u002fC9eA\u002fpHA9Ctej4D8AAAAAAADgPwAAAAAAAOA\u002fMzMzMzMz4z+amZmZmZnZPz0K16NwPdo\u002fpHA9Ctej4D+F61G4HoXbP5qZmZmZmdk\u002f9ihcj8L12D9I4XoUrkfRP5qZmZmZmdk\u002fuB6F61G43j8pXI\u002fC9SjcP6RwPQrXo+A\u002fhetRuB6F2z+F61G4HoXbP\u002fYoXI\u002fC9eA\u002f7FG4HoXr4T8="}},{"label":"proanthocyanins","values":{"dtype":"f8","bdata":"UrgehetRAkB7FK5H4Xr0P3sUrkfhegZAcT0K16NwAUAfhetRuB79P4XrUbgehf8\u002frkfhehSu\u002fz8AAAAAAAD0P65H4XoUrv8\u002fmpmZmZmZ\u002fT8K16NwPQoDQB+F61G4Hvk\u002f9ihcj8L1\u002fD97FK5H4XoGQK5H4XoUrgdAXI\u002fC9Shc9z+F61G4HoX\u002fP4XrUbgehfs\u002fw\u002fUoXI\u002fC\u002fT+PwvUoXI\u002f6P83MzMzMzABArkfhehSu\u002fz8K16NwPQr7P1yPwvUoXPc\u002fj8L1KFyP+j+4HoXrUbj+PzMzMzMzM\u002fc\u002fmpmZmZmZ9T8pXI\u002fC9Sj8P65H4XoUrv8\u002fCtejcD0KA0AzMzMzMzP\u002fP4XrUbgehf8\u002fmpmZmZmZ9T+kcD0K16P4P8P1KFyPwv0\u002fw\u002fUoXI\u002fC9T8K16NwPQr3P+xRuB6F6\u002fU\u002fpHA9CtejAEC4HoXrUbgCQK5H4XoUrvc\u002fMzMzMzMz+z+PwvUoXI\u002f6Pz0K16NwPQBAAAAAAAAA9D+F61G4HoUBQB+F61G4HgFACtejcD0KA0CkcD0K16MAQEjhehSuRwdAUrgehetRAkDsUbgehev9P+F6FK5H4fo\u002f7FG4HoXr+T+amZmZmZkDQD0K16NwPQBAj8L1KFyP+j9SuB6F61EAQOF6FK5H4do\u002fPQrXo3A92j\u002fXo3A9CtfjP1yPwvUoXOc\u002f7FG4HoXr\u002fT97FK5H4XrwP6RwPQrXowBAPQrXo3A9AkCkcD0K16PwP+F6FK5H4do\u002fAAAAAAAABEBcj8L1KFz3P+xRuB6F6\u002f0\u002fexSuR+F68D9cj8L1KFz\u002fP2ZmZmZmZvo\u002fZmZmZmZm8j9cj8L1KFz3P2ZmZmZmZu4\u002fFK5H4XoUBkAzMzMzMzP\u002fP+F6FK5H4fY\u002fUrgehetR\u002fD9mZmZmZmb2P+xRuB6F6\u002fk\u002fzczMzMzMAkBcj8L1KFz3P\u002fYoXI\u002fC9fg\u002fcT0K16Nw9T+amZmZmZn1PxSuR+F6FPY\u002fPQrXo3A9+j8UrkfhehT6P+xRuB6F6\u002fk\u002f16NwPQrX\u002fz+amZmZmZn1Pz0K16NwPQpA9ihcj8L1+D9SuB6F61H8PzMzMzMzM\u002f8\u002fexSuR+F6BkBmZmZmZmb2P5qZmZmZmfU\u002f9ihcj8L19D+4HoXrUbj2P65H4XoUrvc\u002fuB6F61G49j8UrkfhehT6PxSuR+F6FPo\u002fpHA9CtejAEDsUbgehesDQKRwPQrXowxAhetRuB6F8z\u002fNzMzMzMzwPwrXo3A9Cvc\u002fpHA9Ctej8D8UrkfhehQAQHsUrkfhevg\u002fw\u002fUoXI\u002fC+T+PwvUoXI\u002fqP+xRuB6F6\u002f0\u002fSOF6FK5H\u002fT\u002fsUbgehev9P1yPwvUoXPs\u002fFK5H4XoUAEBI4XoUrkcHQJqZmZmZmfU\u002fUrgehetR\u002fD8pXI\u002fC9Sj8P2ZmZmZmZv4\u002fmpmZmZmZ9T8UrkfhehTuP4\u002fC9Shcj+o\u002fj8L1KFyP6j\u002fhehSuR+HqPwAAAAAAAPQ\u002fFK5H4XoU7j+amZmZmZnpP5qZmZmZmfE\u002fKVyPwvUo7D\u002fsUbgehevpPwAAAAAAAOg\u002fexSuR+F65D+amZmZmZnhP1K4HoXrUfA\u002fPQrXo3A98j\u002fNzMzMzMz0P8P1KFyPwuU\u002fhetRuB6F6z8AAAAAAAD0Pz0K16NwPfI\u002fAAAAAAAA9D8pXI\u002fC9Sj0P\u002fYoXI\u002fC9fg\u002f7FG4HoXr\u002fT9mZmZmZmb2P83MzMzMzPg\u002f9ihcj8L1+D89CtejcD3yP5qZmZmZmQVAUrgehetRAkCkcD0K16PwP5qZmZmZmek\u002fuB6F61G47j8UrkfhehTuP3sUrkfhevA\u002fZmZmZmZm8j9cj8L1KFz3PwrXo3A9Cu8\u002fpHA9Ctej+D\u002fD9Shcj8LxP1yPwvUoXOc\u002fexSuR+F65D\u002fXo3A9CtfzP\u002fYoXI\u002fC9fA\u002fj8L1KFyP9j+amZmZmZn1P1yPwvUoXPc\u002fmpmZmZmZ9T8="}},{"label":"color","values":{"dtype":"f8","bdata":"j8L1KFyPFkCF61G4HoURQLgehetRuBZAMzMzMzMzH0BI4XoUrkcRQAAAAAAAABtAAAAAAAAAFUAzMzMzMzMUQM3MzMzMzBRA4XoUrkfhHEAAAAAAAAAXQAAAAAAAABRAZmZmZmZmFkCamZmZmZkVQAAAAAAAAB5AMzMzMzMzHUDNzMzMzMwYQGZmZmZmZhpAZmZmZmZmIUBmZmZmZmYUQJqZmZmZmRZAAAAAAAAAEkBmZmZmZmYOQHE9CtejcA9AKVyPwvUoDECkcD0K16MMQDMzMzMzMxNAmpmZmZmZD0AAAAAAAAASQM3MzMzMzBJAzczMzMzMFkCamZmZmZkbQLgehetRuA5AmpmZmZmZFUDNzMzMzMwQQGZmZmZmZhRAZmZmZmZmEkAAAAAAAAARQJqZmZmZmQ1AZmZmZmZmFECF61G4HoUYQB+F61G4HhFAuB6F61G4FUBxPQrXo3ARQClcj8L1KBRA9ihcj8L1FECamZmZmZkTQGZmZmZmZhhAzczMzMzMGEDNzMzMzMwhQM3MzMzMzBxAZmZmZmZmFkAzMzMzMzMcQDMzMzMzMxlAZmZmZmZmF0AAAAAAAAAZQIXrUbgehRlAAAAAAAAAGEAzMzMzMzMbQDMzMzMzM\u002f8\u002fKVyPwvUoCkAAAAAAAAAXQGZmZmZmZg5AzczMzMzMEUCamZmZmZkHQGZmZmZmZhJAMzMzMzMzFUC4HoXrUbgSQFyPwvUoXAlAzczMzMzMBkBmZmZmZmYIQArXo3A9CgtA7FG4HoXrDUDNzMzMzMwKQK5H4XoUrglAZmZmZmZmDkBmZmZmZmYSQDMzMzMzMwVAMzMzMzMzC0CPwvUoXI8EQAAAAAAAAARAMzMzMzMzD0CamZmZmZkBQDMzMzMzMxNAZmZmZmZmCED2KFyPwvUEQJqZmZmZmQNAzczMzMzMBEBmZmZmZmYGQNejcD0K1\u002fs\u002fMzMzMzMzA0DNzMzMzMwMQGZmZmZmZghAMzMzMzMzAUAAAAAAAAAKQM3MzMzMzARAAAAAAAAABEAzMzMzMzMHQAAAAAAAABJAZmZmZmZmAkBmZmZmZmYKQJqZmZmZmQNAZmZmZmZmBkB7FK5H4XoAQIXrUbgehQdAmpmZmZmZBUAzMzMzMzMLQGZmZmZmZgpAmpmZmZmZBUAzMzMzMzMFQDMzMzMzMwdAAAAAAAAAAEBmZmZmZmYOQKRwPQrXowhAMzMzMzMzB0BmZmZmZmb+PzMzMzMzM\u002f8\u002fexSuR+F6AEAzMzMzMzMLQHsUrkfhevQ\u002fAAAAAAAACkAAAAAAAAAYQKRwPQrXowBAzczMzMzMBEBmZmZmZmYGQBSuR+F6FAZAhetRuB6FD0AAAAAAAAAIQPYoXI\u002fC9QBAzczMzMzMBEBmZmZmZmYQQJqZmZmZmRVAzczMzMzMFkAAAAAAAAAUQM3MzMzMzBVAZmZmZmZmHEDNzMzMzMwOQAAAAAAAABRAzczMzMzMFkCuR+F6FK4TQGZmZmZmZhJAZmZmZmZmFkBmZmZmZmYRQJqZmZmZmRFA7FG4HoVrIEAAAAAAAAAQQJqZmZmZmRNAmpmZmZmZHkDXo3A9CtcgQM3MzMzMzCJAMzMzMzMzIUCamZmZmZklQGZmZmZmZhxACtejcD0KJUBmZmZmZmYeQJqZmZmZmR9AhetRuB4FIkAAAAAAAAAeQAAAAAAAACpAAAAAAACAJ0CamZmZmZkeQIXrUbgehRdAUrgehetRFkAfhetRuB4VQClcj8L1KCNAexSuR+F6GkBcj8L1KFwlQIXrUbgehSRAUrgehetRIUAAAAAAAAAhQAAAAAAAABZAi90+q8zMI0BmZmZmZmYjQM3MzMzMzB5AMzMzMzMzHUBmZmZmZmYkQJqZmZmZmSJAZmZmZmZmIkA="}},{"label":"hue","values":{"dtype":"f8","bdata":"pHA9Ctej8D\u002fNzMzMzMzwP3sUrkfhevA\u002fhetRuB6F6z+kcD0K16PwP83MzMzMzPA\u002fUrgehetR8D\u002f2KFyPwvXwP0jhehSuR\u002fE\u002fKVyPwvUo8D8AAAAAAAD0P7gehetRuPI\u002fZmZmZmZm8j8AAAAAAAD0PzMzMzMzM\u002fM\u002fexSuR+F69D8fhetRuB7xPxSuR+F6FPI\u002frkfhehSu8z+4HoXrUbjuP3E9CtejcPE\u002fexSuR+F68D\u002fD9Shcj8LxP3E9CtejcPE\u002f7FG4HoXr8T8UrkfhehTyP3E9CtejcO0\u002fUrgehetR8D8AAAAAAAD0P6RwPQrXo\u002fA\u002fCtejcD0K8z9xPQrXo3DxP65H4XoUrvM\u002fAAAAAAAA9D+amZmZmZnxP6RwPQrXo\u002fA\u002fcT0K16Nw8T\u002fsUbgehevxP+F6FK5H4fI\u002fexSuR+F67D9mZmZmZmbuPx+F61G4Hu0\u002fKVyPwvUo7D89CtejcD3qPylcj8L1KOw\u002f16NwPQrX6z+kcD0K16PwPx+F61G4Hu0\u002fH4XrUbge8T\u002fsUbgehevxP+xRuB6F6\u002fE\u002f16NwPQrX8z8pXI\u002fC9SjwPxSuR+F6FPI\u002fcT0K16Nw7T9cj8L1KFzvPxSuR+F6FO4\u002fH4XrUbge8T97FK5H4XrsP83MzMzMzPA\u002fAAAAAAAA9D9cj8L1KFzvP65H4XoUrvM\u002fhetRuB6F8z8zMzMzMzP3PwrXo3A9CvM\u002f7FG4HoXr8T\u002fsUbgehevxP1K4HoXrUfA\u002fexSuR+F69D\u002fLoUW28\u002f3sP8P1KFyPwvU\u002fXI\u002fC9Shc7z\u002f2KFyPwvX0P65H4XoUru8\u002frkfhehSu8z8K16NwPQrzP7gehetRuO4\u002f9ihcj8L18D8K16NwPQrzPxSuR+F6FPY\u002fj8L1KFyP8j\u002f2KFyPwvX0P+F6FK5H4eo\u002fSOF6FK5H6T+uR+F6FK7zP0jhehSuR\u002fU\u002fw\u002fUoXI\u002fC9T8AAAAAAADwPx+F61G4HvE\u002fSOF6FK5H8T\u002fNzMzMzMzwP7gehetRuO4\u002fZmZmZmZm8j+PwvUoXI\u002fyP4\u002fC9Shcj\u002fI\u002fZmZmZmZm7j+uR+F6FK7zP6RwPQrXo\u002fA\u002fuB6F61G49j9SuB6F61H0P6RwPQrXo\u002fA\u002fmpmZmZmZ6T8UrkfhehTuP6RwPQrXo\u002fA\u002fhetRuB6F6z8AAAAAAADwPylcj8L1KOw\u002fhetRuB6F6z+4HoXrUbjuPwAAAAAAAOg\u002fzczMzMzM7D+uR+F6FK7zP5qZmZmZmfE\u002fw\u002fUoXI\u002fC7T9cj8L1KFz7P2ZmZmZmZu4\u002f9ihcj8L18D9mZmZmZmbmP8P1KFyPwu0\u002fmpmZmZmZ6T\u002fD9Shcj8LtP3E9CtejcO0\u002fXI\u002fC9Shc5z8AAAAAAADoP4XrUbgehes\u002fFK5H4XoU5j8K16NwPQrvP3sUrkfheuw\u002fSOF6FK5H6T9SuB6F61HoP65H4XoUruc\u002fH4XrUbge5T\u002f2KFyPwvXoPwAAAAAAAOg\u002fXI\u002fC9Shc5z8AAAAAAADoPz0K16NwPeo\u002f7FG4HoXr6T97FK5H4XrsP6RwPQrXo+g\u002fZmZmZmZm5j97FK5H4XrsPx+F61G4Hu0\u002fzczMzMzM5D8zMzMzMzPjP4\u002fC9Shcj+I\u002fSOF6FK5H4T+amZmZmZnhPz0K16NwPeI\u002f4XoUrkfh4j+4HoXrUbjeP4XrUbgeheM\u002f7FG4HoXr4T+PwvUoXI\u002fiPzMzMzMzM+M\u002fPQrXo3A94j9xPQrXo3DlPz0K16NwPeI\u002fPQrXo3A94j\u002fsUbgehevhP7gehetRuO4\u002f16NwPQrX6z\u002fD9Shcj8LlP2ZmZmZmZuY\u002f9ihcj8L16D8zMzMzMzPrPwrXo3A9Cuc\u002frkfhehSu5z9xPQrXo3DlPx+F61G4HuU\u002fPQrXo3A94j\u002fXo3A9CtfjP3sUrkfheuQ\u002fZmZmZmZm5j\u002fhehSuR+HiPzMzMzMzM+M\u002fhetRuB6F4z8="}},{"label":"od280\u002fod315","values":{"dtype":"f8","bdata":"XI\u002fC9ShcD0AzMzMzMzMLQFyPwvUoXAlAmpmZmZmZC0BxPQrXo3AHQM3MzMzMzAZApHA9CtejDECkcD0K16MMQM3MzMzMzAZAZmZmZmZmDEBcj8L1KFwJQI\u002fC9ShcjwZAMzMzMzMzB0DXo3A9CtcFQAAAAAAAAAhACtejcD0KB0AzMzMzMzMFQI\u002fC9ShcjwRAj8L1KFyPBkDhehSuR+EKQK5H4XoUrg1AKVyPwvUoDEAAAAAAAAAQQArXo3A9Cg1Aj8L1KFyPDkCamZmZmZkJQMP1KFyPwglAKVyPwvUoBkAzMzMzMzMLQLgehetRuAxArkfhehSuBUAK16NwPQoHQPYoXI\u002fC9QZAAAAAAAAACED2KFyPwvUGQMP1KFyPwgtAPQrXo3A9BkAUrkfhehQEQIXrUbgehQVAPQrXo3A9DEAK16NwPQoLQAAAAAAAAAhAexSuR+F6DEAAAAAAAAAIQM3MzMzMzApApHA9CtejCkCF61G4HoULQKRwPQrXowpAAAAAAAAABkDNzMzMzMwIQEjhehSuRwdA9ihcj8L1CkAUrkfhehQKQHE9CtejcAdAmpmZmZmZCUA9CtejcD0IQHsUrkfhegpAuB6F61G4BkD2KFyPwvUGQB+F61G4Hv0\u002fuB6F61G4+j9xPQrXo3D5P65H4XoUrgNA9ihcj8L1BkDXo3A9CtcBQGZmZmZmZgJAcT0K16NwCUDXo3A9CtcLQOF6FK5H4f4\u002fj8L1KFyPCEAfhetRuB79P0jhehSuRwlAPQrXo3A9BkAAAAAAAAAMQArXo3A9CglAH4XrUbgeAUDXo3A9CtcDQClcj8L1KARAexSuR+F6AkAK16NwPQoJQPYoXI\u002fC9QhAH4XrUbgeCUDD9Shcj8IFQBSuR+F6FABApHA9CtejCEBI4XoUrkcJQBSuR+F6FAJArkfhehSuCUAAAAAAAAAGQK5H4XoUrglAKVyPwvUoAkAzMzMzMzMFQHsUrkfhegBAZmZmZmZmCkCuR+F6FK4HQArXo3A9CgVAFK5H4XoUAkDsUbgehesFQClcj8L1KAZApHA9CtejBkCuR+F6FK4HQClcj8L1KAZACtejcD0KC0CF61G4HoUDQI\u002fC9ShcjwxAZmZmZmZmCkBcj8L1KFwJQFyPwvUoXANAKVyPwvUoCEAUrkfhehQKQHsUrkfhegZAPQrXo3A9BkAAAAAAAAAEQHsUrkfhegJAhetRuB6FCUD2KFyPwvUGQKRwPQrXowpArkfhehSuB0D2KFyPwvUAQGZmZmZmZghAH4XrUbgeC0CF61G4HoUNQPYoXI\u002fC9QhAzczMzMzMCEAfhetRuB4NQD0K16NwPQpAuB6F61G4BkCF61G4HoUDQD0K16NwPQZAj8L1KFyPBECkcD0K16P0P7gehetRuPY\u002fw\u002fUoXI\u002fC9T+kcD0K16P0Pylcj8L1KPg\u002fSOF6FK5H+T9SuB6F61H0PwrXo3A9Cvs\u002fH4XrUbge\u002fT8zMzMzMzMBQHsUrkfhegJAw\u002fUoXI\u002fCA0B7FK5H4XoAQGZmZmZmZgBAAAAAAAAAAEDhehSuR+H6P0jhehSuR\u002fU\u002fw\u002fUoXI\u002fC\u002fT\u002fsUbgehev5P0jhehSuR\u002fU\u002fzczMzMzM9D+F61G4HoX3P0jhehSuR\u002fU\u002fKVyPwvUo+D\u002fNzMzMzMz4P65H4XoUrvc\u002fPQrXo3A9+j+uR+F6FK77P1yPwvUoXP8\u002fexSuR+F6\u002fD9I4XoUrkf5Px+F61G4Hv0\u002f4XoUrkfhAEAAAAAAAAD8P+F6FK5H4fo\u002fAAAAAAAA\u002fD\u002f2KFyPwvX4PwAAAAAAAPw\u002fzczMzMzM\u002fD+4HoXrUbj+P0jhehSuR\u002f0\u002fFK5H4XoU+j9cj8L1KFz7P9ejcD0K1\u002fs\u002f9ihcj8L1+D\u002f2KFyPwvX4P+xRuB6F6\u002fk\u002fmpmZmZmZ+T8="}},{"label":"proline","values":{"dtype":"i2","bdata":"KQQaBKEEyAXfAqoFCgUPBRUEFQTmBQAFKAV+BAsGHgUABWoEkAZNAwwDAgMLBPcDTQM+A6sEBQWTAwsEBQXrBd4D0wRHBJgDcANRBPwD+AIbAwsERwSoAnUDOAQpBNkDJATsBH4E8QSmBF8FJARgBMoD9gQFBQgCqALCAXYCpAFjAaYC9gH+Ae4CzgJmA5oB2AHZA3YDrAGIAfQB7gLPARYBygJ2AgMCCALCAe8BMgKoAnEC4AHCAe8BIgFZAakDcQKsAZQClgHGAjICtgGfAaACOwH+AegBOAGoAjICRQFfArIBgQGXAe8BWQF0ATQCcQLRAW0BfAF8AXoBYAHSAVYBRAJ2AhICMAJYAooCtwLQAgMCRAJOAlgCDAMIAiYCVwM+A58BcQKKAiYC9AHgAakBowKAAtUC4AFwA5QCbAIIAqgCOgKjAmcCCAK3Aq0C7gJ2Av4B1gGUAuQC7gJDA0gDMAI="}}],"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"line":{"color":{"dtype":"i1","bdata":"AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQECAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw=="},"coloraxis":"coloraxis"},"name":"","type":"parcoords"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"coloraxis":{"colorbar":{"title":{"text":"class"}},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('8bd2c84c-7e5d-4b3d-9c95-ef6b702d477f');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+</section>
 <section id="data-preprocessing" class="level2">
 <h2 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h2>
-<div id="6cb0e75a" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> train_test_split(wine_df, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> X_train.pop(<span class="st">"class"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> X_test.pop(<span class="st">"class"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> (X_train <span class="op">-</span> X_train.mean()) <span class="op">/</span> X_train.std()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> (X_test <span class="op">-</span> X_test.mean()) <span class="op">/</span> X_test.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c2f03744" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> train_test_split(wine_df, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> X_train.pop(<span class="st">"class"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> X_test.pop(<span class="st">"class"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> (X_train <span class="op">-</span> X_train.mean()) <span class="op">/</span> X_train.std()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> (X_test <span class="op">-</span> X_test.mean()) <span class="op">/</span> X_test.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="multinomial-logistic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="multinomial-logistic-regression">Multinomial Logistic Regression</h2>
-<div id="eb7a3882" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model_softmax <span class="op">=</span> LogisticRegression(solver<span class="op">=</span><span class="st">'lbfgs'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>model_softmax.fit(X_train, y_train)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>training_accuracy <span class="op">=</span> model_softmax.score(X_train, y_train)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model_softmax.predict(X_test)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7aa5996d" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model_softmax <span class="op">=</span> LogisticRegression(solver<span class="op">=</span><span class="st">'lbfgs'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model_softmax.fit(X_train, y_train)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>training_accuracy <span class="op">=</span> model_softmax.score(X_train, y_train)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model_softmax.predict(X_test)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              precision    recall  f1-score   support
 
